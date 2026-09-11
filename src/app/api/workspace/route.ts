@@ -148,6 +148,11 @@ export async function POST(request: Request) {
     }
 
     if (body.entity === "ticket") {
+      await initializeWorkspace();
+      const [settings] = await db
+        .select({ itPersonnelName: workspace.itPersonnelName })
+        .from(workspace)
+        .where(eq(workspace.id, 1));
       const [person] = await db
         .select()
         .from(employees)
@@ -221,7 +226,8 @@ export async function POST(request: Request) {
         initialAction,
         resolvedAction,
         action: resolvedAction || initialAction,
-        technician: clean(body.technician, 150),
+        technician:
+          clean(settings?.itPersonnelName, 150) || defaults.itPersonnelName,
         priority,
         status,
         updatedAt: new Date(),

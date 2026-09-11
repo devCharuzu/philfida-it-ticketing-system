@@ -1560,6 +1560,7 @@ export default function Workspace({
         <TicketEditor
           ticket={ticketModal}
           employees={data.employees}
+          itPersonnelName={data.itPersonnelName}
           onClose={() => setTicketModal(null)}
           onSave={async (values) => {
             await saveData(values);
@@ -1630,7 +1631,7 @@ export default function Workspace({
               {
                 icon: Wrench,
                 title: "3. Track the work",
-                text: "Open any request to add IT actions, assign a technician, and update its status. A resolution action is required to mark a request as resolved.",
+                text: "Open any request to add IT actions and update its status. The IT personnel name is filled automatically from Settings, and a resolution action is required to mark a request as resolved.",
               },
               {
                 icon: Printer,
@@ -2390,6 +2391,7 @@ function Modal({
 function TicketEditor({
   ticket,
   employees,
+  itPersonnelName,
   onClose,
   onSave,
   onDelete,
@@ -2398,6 +2400,7 @@ function TicketEditor({
 }: {
   ticket: RequestTicket | "new";
   employees: Employee[];
+  itPersonnelName: string;
   onClose: () => void;
   onSave: (v: Record<string, unknown>) => Promise<void>;
   onDelete: (id: number) => Promise<void>;
@@ -2665,15 +2668,13 @@ function TicketEditor({
                 ))}
               </select>
             </label>
-            <label>
-              IT personnel / Technician
-              <input
-                name="technician"
-                defaultValue={existing?.technician}
-                placeholder="Name of attending IT personnel"
-                maxLength={150}
-              />
-            </label>
+            <div className="info-note full automatic-technician">
+              <ShieldCheck size={18} />
+              <p>
+                IT personnel: <strong>{itPersonnelName}</strong>. This is filled
+                automatically from Settings.
+              </p>
+            </div>
             <label className="full">
               Initial action{" "}
               <span className="optional">(assessment and troubleshooting)</span>
