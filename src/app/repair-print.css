@@ -1,0 +1,43 @@
+/* Caladea is the Cambria-compatible font used by the reference document renderer. */
+@font-face { font-family: 'Repair Form'; src: url('/fonts/Caladea-Regular.ttf') format('truetype'); font-weight: 400; }
+@font-face { font-family: 'Repair Form'; src: url('/fonts/Caladea-Bold.ttf') format('truetype'); font-weight: 700; }
+@font-face { font-family: 'Repair Form'; src: url('/fonts/Caladea-Italic.ttf') format('truetype'); font-style: italic; }
+/* The supplied reference is A4 landscape, with two independently positioned copies. */
+@media print {
+  @page { size: A4 landscape; margin: 0; }
+  html, body { margin: 0 !important; padding: 0 !important; background: white !important; height: auto !important; overflow: visible !important; }
+  * { print-color-adjust: exact !important; -webkit-print-color-adjust: exact !important; }
+  .application, .modal-backdrop, .toast { display: none !important; }
+  .print-document { display: block !important; }
+  .rq-sheet { width: 297mm; height: 210mm; position: relative; margin: 0; padding: 0; color: #000; font-family: 'Repair Form', Cambria, serif; break-inside: avoid; }
+  .rq-sheet::after { content: ''; position: absolute; left: 151.35mm; top: 13.5mm; height: 182mm; border-left: 1.5pt solid #000; }
+  .rq-copy { position: absolute; left: 16.07mm; top: 0; width: 123mm; height: 210mm; }
+  .rq-copy:nth-child(2) { left: 162.65mm; }
+  .rq-logo { position: absolute; left: 1.3mm; top: 15.3mm; width: 12.2mm; height: 10.8mm; object-fit: contain; }
+  .rq-copy:nth-child(2) .rq-logo { left: -2.5mm; }
+  .rq-header { position: absolute; left: 0; top: 12.62mm; width: 123mm; text-align: center; font-size: 9pt; line-height: 10.7pt; font-weight: 400; letter-spacing: normal; }
+  .rq-copy:nth-child(2) .rq-header, .rq-copy:nth-child(2) .rq-title { left: -4.5mm; }
+  .rq-agency { font-weight: bold; white-space: nowrap; }
+  .rq-link { color: #0000ff; text-decoration: underline; }
+  .rq-title { position: absolute; top: 38.68mm; left: 0; width: 123mm; margin: 0; font-size: 9pt; font-weight: bold; line-height: 10.7pt; letter-spacing: normal; text-align: center; }
+  .rq-body { position: absolute; top: 52.5mm; left: 0; width: 123mm; font-size: 11pt; line-height: 12.9pt; }
+  .rq-copy:nth-child(2) .rq-body { top: 51.67mm; }
+  .rq-field { position: absolute; left: 0; width: 123mm; display: flex; gap: 2mm; align-items: baseline; margin: 0; padding: 0; border: 0; font-weight: normal; }
+  .rq-field > span:first-child { flex-shrink: 0; }
+  .rq-value { white-space: pre-wrap; overflow-wrap: anywhere; min-width: 0; }
+  .rq-number, .rq-brand { width: 49mm; }
+  .rq-date, .rq-model { left: 50.8mm; width: 72.2mm; }
+  .rq-issue .rq-value, .rq-description .rq-value, .rq-initial .rq-value, .rq-resolution .rq-value { font-size: 9pt; line-height: 10pt; }
+  .rq-resolution > span:first-child { font-style: italic; }
+  /* Emphasis requested by the operator uses only the existing reference text. */
+  .rq-resolved-status .rq-value, .rq-resolution .rq-value { font-weight: bold; }
+  .rq-signatures { position: absolute; top: 141.1mm; left: 0; width: 123mm; display: grid; grid-template-columns: 76.2mm 46.8mm; font-size: 9pt; line-height: 10.7pt; text-align: left; }
+  .rq-signatures > div { overflow-wrap: anywhere; }
+  .analytics-print { margin: 12.7mm; font-family: Arial, sans-serif; color: #222; }
+  .report-header { display: flex; align-items: center; gap: 10mm; border-bottom: 1px solid #777; padding-bottom: 5mm; }
+  .report-header h1 { font-size: 18pt; }.report-header p { font-size: 10pt; }
+  .print-header { display: flex; align-items: center; gap: 3mm; font-size: 8pt; }.print-logo { width: 16mm; height: 16mm; object-fit: contain; }.print-header-text>strong { display: block; }
+  .report-period { display: flex; justify-content: space-between; font-size: 10pt; padding: 4mm 0; }
+  .report-kpis { display: grid; grid-template-columns: repeat(5,1fr); gap: 5mm; margin: 3mm 0 6mm; }.report-kpis strong { display: block; font-size: 24pt; }
+  .analytics-print h2 { font-size: 13pt; margin: 5mm 0 3mm; }.analytics-print table { border-collapse: collapse; width: 100%; }.analytics-print td, .analytics-print th { font-size: 8pt; padding: 2.5mm; border: 1px solid #ccc; }.analytics-print tr { break-inside: avoid; }.analytics-print thead { display: table-header-group; }.analytics-print>footer { font-size: 8pt; margin-top: 8mm; }
+}
